@@ -84,3 +84,89 @@ export const forzarRecargos = async () => {
   });
   return res.json();
 };
+
+// --- PROSPECTOS (PIPELINE CRM) ---
+export const getProspectos = async () => {
+  const res = await fetch(`${API_URL}/prospectos`, {
+    headers: getAuthHeaders()
+  });
+  return res.json();
+};
+
+export const createProspecto = async (prospectoData) => {
+  const res = await fetch(`${API_URL}/prospectos`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(prospectoData)
+  });
+  return res.json();
+};
+
+export const updateProspecto = async (id, prospectoData) => {
+  const res = await fetch(`${API_URL}/prospectos/${id}`, {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(prospectoData)
+  });
+  return res.json();
+};
+
+export const deleteProspecto = async (id) => {
+  const res = await fetch(`${API_URL}/prospectos/${id}`, {
+    method: 'DELETE',
+    headers: getAuthHeaders()
+  });
+  return res.json();
+};
+
+
+export const convertirProspecto = async (id, data) => {
+  const res = await fetch(`${API_URL}/prospectos/${id}/convertir`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(data)
+  });
+  return res.json();
+};
+
+export const darBajaAlumna = async (id, motivo_baja) => {
+  const res = await fetch(`${API_URL}/alumnas/${id}/baja`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ motivo_baja })
+  });
+  return res.json();
+};
+
+export const reactivarAlumna = async (id) => {
+  const res = await fetch(`${API_URL}/alumnas/${id}/reactivar`, {
+    method: 'POST',
+    headers: getAuthHeaders()
+  });
+  return res.json();
+};
+
+// --- MARKETING Y EVENTOS (BANCO DE IDEAS) ---
+export const getIdeas = async () => {
+  const res = await fetch(`${API_URL}/ideas`, {
+    headers: getAuthHeaders()
+  });
+  return res.json();
+};
+
+export const createIdea = async (ideaData) => {
+  const res = await fetch(`${API_URL}/ideas`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(ideaData)
+  });
+  return res.json();
+};
+
+export const deleteIdea = async (id) => {
+  const res = await fetch(`${API_URL}/ideas/${id}`, {
+    method: 'DELETE',
+    headers: getAuthHeaders()
+  });
+  return res.json();
+};

@@ -4,24 +4,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const pool = require('../config/db');
 
-// RUTA TEMPORAL: Crear el primer administrador (Ejecutar solo una vez)
-router.post('/setup', async (req, res) => {
-  try {
-    const check = await pool.query('SELECT * FROM administradores');
-    if (check.rows.length > 0) return res.status(400).json({ error: 'El admin ya existe.' });
-
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash('argos2026', salt); // Contraseña por defecto
-
-    await pool.query(
-      'INSERT INTO administradores (nombre, email, password_hash) VALUES ($1, $2, $3)',
-      ['Directora Argos', 'admin@argos.com', hash]
-    );
-    res.json({ mensaje: 'Administrador creado. Correo: admin@argos.com / Pass: argos2026' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
 // Login real
 router.post('/login', async (req, res) => {
